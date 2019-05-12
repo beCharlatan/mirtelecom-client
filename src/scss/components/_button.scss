@@ -1,0 +1,91 @@
+.btn {
+  font-size: 1.6rem !important;
+  text-transform: lowercase;
+  color: white !important;
+  font-weight: 500;
+  transition: all .3s;
+  border-radius: 2.2rem;
+  background-image: none !important;
+
+  @include respond(phone) {
+    border-radius: 2rem;
+  }
+
+  &:focus {
+    outline: none !important;
+  }
+
+  &--blue {
+    background-color: $primary !important;
+    box-shadow: 0 0 0 2px rgba($primary-light, .6) !important;
+
+    &:hover,
+    &:focus {
+      background-color: $primary-dark !important;
+      box-shadow: 0 0 0 3px rgba($primary-light, .6) !important;
+    }
+
+    &:active {
+      color: $primary-light !important;
+      box-shadow: none !important;
+    }
+  }
+
+  &--green {
+    background-color: $secondary !important;
+    box-shadow: 0 0 0 2px rgba($secondary-light, .6) !important;
+
+    &:hover,
+    &:focus {
+      background-color: $secondary-dark !important;
+      box-shadow: 0 0 0 3px rgba($secondary-light, .6) !important;
+    }
+
+    &:active {
+      color: $secondary-light !important;
+      box-shadow: none !important;
+    }
+  }
+
+  &--default {
+    background-color: $grey-light-4;
+    box-shadow: 0 0 0 2px rgba($grey-dark-2, .6) !important;
+    color: $grey-dark-1 !important;
+
+    &:hover,
+    &:focus {
+      background-color: $grey-dark-3 !important;
+      box-shadow: 0 0 0 3px rgba($grey-dark-3, .6) !important;
+    }
+
+    &:active {
+      color: $grey-light-2 !important;
+      box-shadow: none !important;
+    }
+  }
+}
+
+.btn-link {
+  font-size: 1.6rem !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  padding: 0.5rem !important;
+  background-color: transparent !important;
+  color: white !important;
+  border-bottom: 1px solid !important;
+  background-image: none !important;
+  transition: all .3s;
+
+  &:hover {
+    color: $primary !important;
+    background-color: white !important;
+    border-bottom: 1px solid white !important;
+  }
+}
+
+.link {
+  &--active {
+    border-radius: 2.5rem;
+    background-color: rgba($primary-light, .4);
+  }
+}

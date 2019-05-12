@@ -1,0 +1,119 @@
+.card {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 2rem;
+
+  @include respond(phone) {
+    flex-direction: column;
+    padding: 0 1rem;
+  }
+
+  &__header {
+    display: flex;
+    padding-bottom: .5rem;
+    border-bottom: 1px solid $grey-light-4;
+    margin-top: 3rem;
+    margin-bottom: 1.5rem;
+    width: 100%;
+
+    @include respond(phone) {
+      margin-top: 1.5rem;
+      margin-bottom: 1rem;
+    }
+  }
+
+  &__title {
+    flex: 1;
+    transition: all .2s;
+
+    @include respond(tab-port) {
+      padding-left: 1.5rem;
+    }
+
+    &:hover {
+      color: $primary;
+    }
+  }
+
+  &__info {
+    width: 35%;
+    margin-right: 2rem;
+    margin-bottom: 2rem;
+
+    @include respond(phone) {
+      width: 100%;
+      margin-right: 0;
+      margin-bottom: 1rem;
+    }
+  }
+
+  &__geo {
+    flex-grow: 1;
+    margin-bottom: 2rem;
+
+    @include respond(phone) {
+      width: 100%;
+      margin-bottom: 1rem;
+    }
+  }
+
+  &__cfg {
+    width: 100%;
+    overflow-y: auto;
+  }
+
+  &__del {
+    margin: 2rem 0;
+
+    @include respond(phone) {
+      margin: 1rem 0;
+    }
+  }
+
+  &__tag {
+    color: $grey-dark-2;
+    font-size: 2.2rem;
+    text-transform: uppercase;
+    font-weight: 300;
+    margin-bottom: 1rem;
+
+    @include respond(phone) {
+      font-size: 1.8rem;
+    }
+  }
+}
+
+.card-list {
+  margin-top: 2rem;
+  list-style: none;
+  font-size: 1.6rem;
+
+  @include respond(phone) {
+    margin-top: 1rem;
+  }
+
+  &__item {
+    padding: 1rem 0;
+    display: flex;
+  }
+
+  &__value {
+    flex: 1;
+    text-align: end;
+
+    &--blue {
+      font-weight: 600;
+      color: $primary;
+    }
+
+    &--red {
+      font-weight: 600;
+      color: orangered;
+    }
+  }
+}
+
+.card-address {
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+}

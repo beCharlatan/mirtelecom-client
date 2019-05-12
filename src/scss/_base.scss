@@ -1,0 +1,53 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+*:before, *:after {
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%; /* 10px for using rem */
+
+  @include respond(tab-port) {
+    font-size: 57%;
+  }
+  @include respond(phone) {
+    font-size: 50%;
+  }
+}
+
+body {
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: 400;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  margin: 0;
+  padding: 0;
+}
+
+::-moz-selection {
+  background-color: #FFA;
+  color: #000;
+}
+
+::selection {
+  background-color: #FFA;
+  color: #000;
+}
+
+*::-webkit-scrollbar {
+  width: .5rem;
+}
+
+*::-webkit-scrollbar-track {
+  border-radius: 4rem;
+  background-color: $grey-light-3;
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 4rem;
+  background-color: $grey-dark-2;
+}

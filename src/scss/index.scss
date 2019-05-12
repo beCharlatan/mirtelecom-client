@@ -1,0 +1,36 @@
+//blueprint.css
+@import "~normalize.css";
+@import "~@blueprintjs/core/lib/css/blueprint.css";
+@import "~@blueprintjs/icons/lib/css/blueprint-icons.css";
+
+// variables (to use $var must be on the top)
+@import "./variables";
+
+// mixins
+@import "./mixins";
+
+// base
+@import "./base";
+
+// utils
+@import "./utiliteis";
+
+// layout
+@import "./layout";
+
+// components
+@import "./components/button";
+@import "./components/type";
+
+// import custom scss files
+@import "../components/pages/home-page";
+@import "../components/forms/filter-items";
+@import "../components/pages/form-page";
+@import "../components/header/app-header";
+@import "../components/toolbar/app-toolbar";
+@import "../components/equipment/table";
+@import "../components/forms/data-form";
+@import "../components/equipment/list";
+@import "../components/equipment/card";
+@import "../components/statistics-bar/statistics-bar";
+@import "../components/map/map";

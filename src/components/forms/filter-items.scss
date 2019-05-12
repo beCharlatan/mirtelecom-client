@@ -1,0 +1,14 @@
+.filter-control {
+  width: 100%;
+  display: flex;
+
+  &__input {
+    flex: 1;
+    align-self: center;
+  }
+
+  &__btn {
+    margin-left: 1rem;
+    border-radius: 50%;
+  }
+}
