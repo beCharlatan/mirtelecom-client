@@ -1,78 +1,71 @@
 import * as React from 'react'
-import {Map, TileLayer, Marker, Popup, Tooltip, LayerGroup, LayersControl, withLeaflet} from 'react-leaflet'
+import {Map, TileLayer, Popup, Marker, LayersControl, Tooltip, GeoJSON, withLeaflet} from 'react-leaflet'
 import PrintControlDefault from 'react-leaflet-easyprint'
 import MagnifyingGlassControlDefault from 'react-leaflet-magnifying-glass'
 import MeasureControlDefault from 'react-leaflet-measure'
-import DeflateDefault from 'react-leaflet-deflate'
-// import { ReactLeafletSearch } from 'react-leaflet-search'
+import MarkerClusterGroup from 'react-leaflet-markercluster'
+import {measureOprions, glassOptions, printOptions, saveAsPngOptions} from './options'
 import EquipmentPopup from './equipment-popup'
+import {IconEquipEk, IconEquipMtk, IconEquipDef, getCustomMuftMarker} from './marker'
 
 const {BaseLayer, Overlay} = LayersControl
-
-const Deflate = withLeaflet(DeflateDefault)
 const PrintControl = withLeaflet(PrintControlDefault)
 const MagnifyingGlassControl = withLeaflet(MagnifyingGlassControlDefault)
 const MeasureControl = withLeaflet(MeasureControlDefault)
-// const ReactLeafletSearchCustom = withLeaflet(ReactLeafletSearch)
 
-const measureOprions = {
-    position: 'topleft',
-    primaryLengthUnit: 'meters',
-    popupOptions: {className: 'leaflet-measure-resultpopup', autoPanPadding: [60, 60]},
-    secondaryLengthUnit: 'kilometers',
-    primaryAreaUnit: 'sqmeters',
-    secondaryAreaUnit: 'acres',
-    activeColor: '#669eff',
-    completedColor: '#2965cc'
-}
-
-const glassOptions = {
-    position: 'topleft',
-    radius: 100,
-    zoomOffset: 3
-}
-
-const printOptions = {
-    title: "Напечатать карту",
-    position: "topright",
-    hideControlContainer: false,
-    sizeModes: ['A4Portrait', 'A4Landscape']
-}
-
-const saveAsPngOptions = {
-    title: "Экспорт карты в PNG",
-    position: "topright",
-    sizeModes: ['A4Portrait', 'A4Landscape'],
-    hideControlContainer: true,
-    exportOnly: true
-}
-
-export interface IItemProps {
-    gid: number,
-    name: string,
-    address: string,
-    equipment: string,
-    status: string,
-    ip: string,
-    sn: string,
-    note: string,
-    geom: string,
-    st_asgeojson: string
+export interface IEquipmentProps {
+    id: number,
+    type: string,
+    geometry: {
+        type: string,
+        coordinates: string[]
+    },
+    properties: {
+        name: string,
+        address: string,
+        equipment: string,
+        status: string,
+        ip: string,
+        sn: string,
+        note: string
+    }
 }
 
 interface IPrimaryMapProps {
-    data: IItemProps[]
+    features: {
+        equipments: {
+            type: string,
+            features: IEquipmentProps[]
+        },
+        substations: {
+            type: string,
+            features: Object[]
+        },
+        mufts: {
+            type: string,
+            features: Object[]
+        },
+        vok: {
+            type: string,
+            features: Object[]
+        }
+    }
 }
 
 class PrimaryMap extends React.Component<IPrimaryMapProps> {
+
     private printControl: any
+
     render() {
         let {
-            data
+            features
         } = this.props
+        const {substations, mufts, vok} = features
+        const markers: IEquipmentProps[] = features['equipments'].features
         return <Map
             center={[55.753215, 37.622504]}
             zoom={10}
+            maxZoom={19}
             className="map"
             style={{height: "80rem", marginBottom: "4rem"}}>
             <MagnifyingGlassControl {...glassOptions} />
@@ -82,11 +75,6 @@ class PrimaryMap extends React.Component<IPrimaryMapProps> {
             />
             <PrintControl {...saveAsPngOptions} />
             <MeasureControl {...measureOprions} />
-            {/*<ReactLeafletSearchCustom*/}
-            {/*    position="topleft"*/}
-            {/*    provider="OpenStreetMap"*/}
-            {/*    providerOptions={{region: 'gb'}}*/}
-            {/*/>*/}
             <LayersControl position="topright">
                 <BaseLayer name="OpenStreetMap" checked>
                     <TileLayer
@@ -95,21 +83,46 @@ class PrimaryMap extends React.Component<IPrimaryMapProps> {
                     />
                 </BaseLayer>
                 <Overlay name="Оборудование" checked>
-                    <LayerGroup>
+                    <MarkerClusterGroup>
                         {
-                            data && data.map((i: IItemProps, id: number): React.ReactNode => {
-                                if (i.st_asgeojson) {
-                                    const coords = i.st_asgeojson && JSON.parse(i.st_asgeojson).coordinates.reverse()
-                                    return <Marker key={id} position={coords}>
-                                        <Popup>
-                                            <EquipmentPopup item={i} />
-                                        </Popup>
-                                        <Tooltip direction="left" offset={[-5, 20]}>{i.name}</Tooltip>
-                                    </Marker>
-                                }
+                            markers && markers.map((i, idx): React.ReactNode => {
+                                return <Marker key={idx}
+                                               icon={i.properties.status === 'MTK' || i.properties.status === 'МТК' ? IconEquipMtk : i.properties.status === 'EK' || i.properties.status === 'ЭК' ? IconEquipEk : IconEquipDef}
+                                               position={i.geometry.coordinates.reverse()}>
+                                    <Popup><EquipmentPopup item={i}/></Popup>
+                                    <Tooltip>{i.properties.name}</Tooltip>
+                                </Marker>
                             })
                         }
-                    </LayerGroup>
+                    </MarkerClusterGroup>
+                </Overlay>
+                <Overlay name="Подстанции" checked>
+                    {!!Object.entries(substations).length &&
+                    <GeoJSON
+                        onEachFeature={(feature, layer): void => {
+                            return layer.bindPopup(`
+                                <h4>${feature.properties.name}</h4>
+                            `)
+                        }}
+                        data={substations}/>}
+                </Overlay>
+                <Overlay name="Муфты" checked>
+                    {!!Object.entries(mufts).length &&
+                    <GeoJSON
+                      pointToLayer={getCustomMuftMarker}
+                      data={mufts}
+                        />}
+                </Overlay>
+                <Overlay name="ВОК" checked>
+                    {!!Object.entries(vok).length &&
+                    <GeoJSON
+                      style={() => ({
+                          weight: 5
+                      })}
+                      onEachFeature={(feature, layer): void => {
+                          return layer.bindPopup('трасса ВОК АО МирТелеКом')
+                      }}
+                      data={vok} />}
                 </Overlay>
             </LayersControl>
         </Map>

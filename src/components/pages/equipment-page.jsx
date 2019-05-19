@@ -5,7 +5,7 @@ import FilterItems from '../forms/filter-items'
 import LinkButton from '../common/link-button'
 import {ButtonGroup} from '@blueprintjs/core'
 import EquipmentData from '../equipment/equipment-data'
-import FeatureData from '../map/feature-data'
+import FeaturesData from '../map/features-data'
 import PrimaryMap from '../map/primary-map'
 import EquipmentTable from '../equipment/equipment-table'
 import EquipmentList from '../equipment/equipment-list'
@@ -48,8 +48,8 @@ const EquipmentPage = ({match}) => {
     <div className="card__header">
       <h1 className="card__title">Карта</h1>
     </div>
-    <FeatureData
-      render={({data}) => <PrimaryMap data={data}/>}
+    <FeaturesData
+      render={({features}) => <PrimaryMap features={features}/>}
     />
   </section>
 }

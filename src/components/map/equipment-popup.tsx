@@ -1,15 +1,15 @@
 import * as React from 'react'
-import {IItemProps} from './primary-map'
+import {IEquipmentProps} from './primary-map'
 
-interface IEquipmentPopupProps {
-    item: IItemProps
+export interface IEquipmentPopupProps {
+    item: IEquipmentProps
 }
 
 const EquipmentPopup: React.FC<IEquipmentPopupProps> = ({
     item
 }) => {
-    const {name, address, equipment} = item
-    return <div style={{width: '100%'}}>
+    const {name, address, equipment} = item.properties
+    return <div>
         <h3>{name}</h3>
         <p>{address}</p>
         <p>{equipment}</p>

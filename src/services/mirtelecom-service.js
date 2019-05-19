@@ -10,13 +10,13 @@ export default class MirtelecomService {
   //_authBase = 'http://172.16.13.250:8081/auth'
 
   getResource = async (url) => {
-    const res = await fetch(`${this._apiBase}${url}`);
+    const res = await fetch(`${this._apiBase}${url}`)
 
     if (!res.ok) {
       throw new Error(`Could not fetch ${url}` +
         `, received ${res.status}`)
     }
-    return await res.json();
+    return await res.json()
   };
 
   getSignIn = async (obj) => {
@@ -32,13 +32,11 @@ export default class MirtelecomService {
   }
 
   getEquipment = async () => {
-    const equipments = await this.getResource(`/equipments`);
-    return equipments;
+    return await this.getResource(`/equipments`)
   };
 
   getOneEquipment = async (id) => {
-    const equipment = await this.getResource(`/equipment/${id}`);
-    return equipment;
+    return await this.getResource(`/equipment/${id}`)
   };
 
   getCreatedEquipment = async (obj) => {
@@ -49,7 +47,7 @@ export default class MirtelecomService {
       }),
       body: JSON.stringify(obj)
     })
-    return await createdEquipment.json();
+    return await createdEquipment.json()
   }
 
   getRemovedEquipment = async (id) => {
@@ -59,7 +57,7 @@ export default class MirtelecomService {
         "Content-Type": "application/json"
       })
     })
-    return await removedEquipment.json();
+    return await removedEquipment.json()
   }
 
   getUpdatedEquipment = async (obj) => {
@@ -71,8 +69,16 @@ export default class MirtelecomService {
       }),
       body: JSON.stringify(obj)
     })
-    return await updatedEquipment.json();
+    return await updatedEquipment.json()
   }
+
+  getFeature = async table => {
+    return await this.getResource(`/features/${table}`)
+  }
+
+  getEquipmentFeature = async () => {
+    return await this.getResource(`/features/equipment`)
+  };
 
   // getUnique = {
   //   addresses: getUnique(this.data, 'address'),

@@ -6,49 +6,51 @@ import withMirtelecomService from '../../HOC/with-mirtelecom-service'
 import {compose} from '../../utils'
 import Loader from '../common/loader'
 import ErrorMessage from '../error/error-message'
-import {equipmentSelector} from "../../selectors/equipment-selector"
 import {
-  fetchEquipment,
-  fetchRemoveEquipment
+  fetchEquipmentFeature,
+  fetchSubstationFeature,
+  fetchMuftsFeature,
+  fetchVokFeature
 } from "../../redux"
 
-class FeatureData extends React.Component {
+class FeaturesData extends React.Component {
 
   componentDidMount() {
-    this.props.get()
+    this.props.getEquipment()
+    this.props.getSubstation()
+    this.props.getMufts()
+    this.props.getVok()
   }
 
-  componentDidUpdate(prevProps) {
-    if (this.props.filter && (this.props.filter.join('') !== prevProps.filter.join(''))) {
-      this.props.get()
-    }
-  }
+  componentDidUpdate() {}
 
   render() {
 
-    const {data, error, load} = this.props
+    const {error, load, features} = this.props
 
     if (load) return <Loader />
     if (error) return <ErrorMessage />
 
     return this.props.render({
-      data: data
+      features: features
     })
   }
 }
 
 const mapState = (state) => {
-  const {equipment: {load, error}} = state
+  const {map: {load, error, features}} = state
   return {load,
     error,
-    data: equipmentSelector(state)
+    features
   }
 }
 
 const actions = (disptach, {mirtelecomService}) => {
   return bindActionCreators({
-    get: fetchEquipment(mirtelecomService),
-    remove: fetchRemoveEquipment(mirtelecomService)
+    getEquipment: fetchEquipmentFeature(mirtelecomService),
+    getSubstation: fetchSubstationFeature(mirtelecomService),
+    getMufts: fetchMuftsFeature(mirtelecomService),
+    getVok: fetchVokFeature(mirtelecomService)
   }, disptach)
 }
 
@@ -56,4 +58,4 @@ export default compose(
   withRouter,
   withMirtelecomService(),
   connect(mapState, actions)
-)(FeatureData)
+)(FeaturesData)
