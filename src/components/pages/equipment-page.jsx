@@ -9,6 +9,7 @@ import FeaturesData from '../map/features-data'
 import PrimaryMap from '../map/primary-map'
 import EquipmentTable from '../equipment/equipment-table'
 import EquipmentList from '../equipment/equipment-list'
+import EquipRtable from '../equipment/equip-rtable'
 
 const LinkButtons = <ButtonGroup>
   <LinkButton
@@ -36,9 +37,15 @@ const EquipmentPage = ({match}) => {
     {
       match.params.display === 'table' &&
       <EquipmentData
-        render={({data, remove}) => <EquipmentTable data={data} remove={remove} />}
+        render={({data, remove}) => <EquipRtable data={data} remove={remove} />}
       />
     }
+    {/*{*/}
+    {/*  match.params.display === 'table' &&*/}
+    {/*  <EquipmentData*/}
+    {/*    render={({data, remove}) => <EquipmentTable data={data} remove={remove} />}*/}
+    {/*  />*/}
+    {/*}*/}
     {
       match.params.display === 'list' &&
       <EquipmentData
