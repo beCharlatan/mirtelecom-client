@@ -28,7 +28,7 @@ const getUnique = (arr, prop) => {
 const _getStringOfValues = (obj) => {
   let str = '';
   for (let key in obj) {
-    if (!(key === 'id' || key === 'gid' || key === 'geom' || key === 'st_asgeojson')) {
+    if (!(key === 'id' || key === 'geom')) {
       str += (obj[key].toLowerCase());
     }
   }

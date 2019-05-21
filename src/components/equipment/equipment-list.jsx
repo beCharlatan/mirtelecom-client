@@ -16,7 +16,7 @@ const ItemContext = React.createContext()
 const Head = ({label}) => {
   return (
     <ItemContext.Consumer>
-      {contextValue => <Link to={`/equipment/details/${contextValue.gid}`}><h3 className="list__head">{contextValue[label]}</h3></Link>}
+      {contextValue => <Link to={`/equipment/details/${contextValue.id}`}><h3 className="list__head">{contextValue[label]}</h3></Link>}
     </ItemContext.Consumer>
   )
 }
@@ -41,12 +41,12 @@ const Desc = ({label}) => {
 const EquipmentList = ({data}) => {
 
   const rowRenderer = ({index, key, style}) => {
-    const item = data[index], {gid, equipment, name, address} = item;
+    const item = data[index], {id, equipment, name, address} = item;
     return (
       <Card key={key} style={style} className='list__item'>
         <ItemContext.Provider value={item}>
           <div className="list__content">
-            <Link to={`/equipment/details/${gid}`}><h3 className="list__head">{name}</h3></Link>
+            <Link to={`/equipment/details/${id}`}><h3 className="list__head">{name}</h3></Link>
             <p className="list__sub">{address}</p>
             <span className="list__desc">{equipment}</span>
           </div>

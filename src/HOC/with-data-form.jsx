@@ -1,8 +1,8 @@
-import React from 'react';
-import {connect} from 'react-redux';
-import {withRouter} from 'react-router';
-import {compose} from '../utils';
-import withMirtelecomService from './with-mirtelecom-service';
+import React from 'react'
+import {connect} from 'react-redux'
+import {withRouter} from 'react-router'
+import {compose} from '../utils'
+import withMirtelecomService from './with-mirtelecom-service'
 
 const withDataForm = (mapState, actions, mask) => (Wrapped) => {
 
@@ -10,7 +10,7 @@ const withDataForm = (mapState, actions, mask) => (Wrapped) => {
 
     handleSubmit = values => {
       const redirect = () => this.props.history.push('/equipments/dashboard/table');
-      if (!values.gid) {
+      if (!values.id) {
         this.props.create(values, redirect)
       } else {
         this.props.update(values, redirect)

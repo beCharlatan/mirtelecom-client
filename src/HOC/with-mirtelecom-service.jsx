@@ -17,4 +17,4 @@ const withMirtelecomService = () => (Wrapped) => {
   }
 }
 
-export default withMirtelecomService;
+export default withMirtelecomService

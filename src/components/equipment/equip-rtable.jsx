@@ -1,30 +1,43 @@
 import React from 'react'
 import ReactTable from 'react-table'
 import 'react-table/react-table.css'
+import withTableOptions from '../../HOC/with-table-options'
 
-const EquipRtable = ({data, remove}) => {
+const EquipRtable = ({data, remove, options}) => {
+
+  const {defaultPageSize,
+    pageSizeOptions,
+    showPaginationTop,
+    resizable, shownFields} = options
 
   const columns = [{
     Header: 'Наименование',
-    accessor: 'name'
+    accessor: 'name',
+    show: shownFields.indexOf('name') > -1
   }, {
     Header: 'Адрес',
-    accessor: 'address'
+    accessor: 'address',
+    show: shownFields.indexOf('address') > -1
   }, {
     Header: 'Оборудование',
-    accessor: 'equipment'
+    accessor: 'equipment',
+    show: shownFields.indexOf('equipment') > -1
   }, {
     Header: 'Статус',
-    accessor: 'status'
+    accessor: 'status',
+    show: shownFields.indexOf('status') > -1
   }, {
     Header: 'IP адрес',
-    accessor: 'ip'
+    accessor: 'ip',
+    show: shownFields.indexOf('ip') > -1
   }, {
     Header: 'Сер. номер',
-    accessor: 'sn'
+    accessor: 'sn',
+    show: shownFields.indexOf('sn') > -1
   }, {
     Header: 'Примечание',
     accessor: 'note',
+    show: shownFields.indexOf('note') > -1,
     sortable: false
   }]
 
@@ -34,12 +47,14 @@ const EquipRtable = ({data, remove}) => {
     pageText={'Страница'}
     ofText={'из'}
     rowsText={'эл.'}
-    defaultPageSize={25}
-    pageSizeOptions={[10, 20, 25, 50]}
+    defaultPageSize={defaultPageSize}
+    pageSizeOptions={pageSizeOptions}
+    showPaginationTop={showPaginationTop}
+    resizable={resizable}
     data={data}
     columns={columns}
   />
 
 }
 
-export default EquipRtable
+export default withTableOptions('equipmentTable')(EquipRtable)

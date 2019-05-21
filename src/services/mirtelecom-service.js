@@ -61,7 +61,7 @@ export default class MirtelecomService {
   }
 
   getUpdatedEquipment = async (obj) => {
-    const updatedEquipment = await fetch(`${this._apiBase}/equipment/update/${obj.gid}`, {
+    const updatedEquipment = await fetch(`${this._apiBase}/equipment/update/${obj.id}`, {
       method: 'PUT',
       mode: 'cors',
       headers: new Headers({

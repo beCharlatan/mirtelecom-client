@@ -20,6 +20,23 @@ const initialState = {
     load: false,
     error: null,
     filter: []
+  },
+  options: {
+    equipmentTable: {
+      defaultPageSize: 25,
+      pageSizeOptions: [10, 20, 25, 50],
+      showPaginationTop: false,
+      resizable: true,
+      shownFields: [
+        'name',
+        'address',
+        'equipment',
+        'status',
+        'ip',
+        'sn',
+        'note'
+      ]
+    }
   }
 }
 
@@ -241,7 +258,7 @@ const equipmentReducer = handleActions({
   [removeEquipmentSuccess]: (state, {payload}) => ({
     ...state,
     data: [
-      ...state.data.filter(i => i.gid !== parseInt(payload))
+      ...state.data.filter(i => i.id !== parseInt(payload))
     ],
     load: false,
     error: null,
@@ -249,7 +266,7 @@ const equipmentReducer = handleActions({
   [updateEquipmentSuccess]: (state, {payload}) => ({
     ...state,
     data: [
-      ...state.data.map(i => i.gid === payload.gid ? payload : i)
+      ...state.data.map(i => i.id === payload.id ? payload : i)
     ],
     load: false,
     error: null,
@@ -320,9 +337,12 @@ const notificationReducer = handleActions({
   [clearNotification]: () => (null)
 }, initialState.notification)
 
+const optionsReducer = handleActions({}, initialState.options)
+
 export default combineReducers({
   map: mapReducer,
   equipment: equipmentReducer,
   auth: authReducer,
-  notification: notificationReducer
+  notification: notificationReducer,
+  options: optionsReducer
 })

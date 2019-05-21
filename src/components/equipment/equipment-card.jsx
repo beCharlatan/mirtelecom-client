@@ -7,15 +7,15 @@ import SimpleMap from '../map/simple-map'
 
 const EquipmentCard = ({data, remove, history}) => {
   console.log(data)
-    const {equipment, address, status, note, name, sn, ip, gid, st_asgeojson} = data
-    const coords = st_asgeojson && JSON.parse(st_asgeojson).coordinates.reverse()
+    const {equipment, address, status, note, name, sn, ip, id, geom} = data
+    const coords = geom && JSON.parse(geom).coordinates.reverse()
     return <div className="card">
       <div className="card__header">
           <h1 className="card__title">{name}</h1>
           <div className="card__actions">
               <NavLinkButton
                   minimal
-                  to={`/equipment/update/${gid}`}
+                  to={`/equipment/update/${id}`}
                   active="link--active">
                   <Icon icon="edit" />
               </NavLinkButton>
@@ -69,7 +69,7 @@ const EquipmentCard = ({data, remove, history}) => {
           large
           fill
           onClick={() => {
-            remove(gid, () => history.push('/equipments/dashboard/table'))
+            remove(id, () => history.push('/equipments/dashboard/table'))
           }}
           intent={Intent.DANGER}
           text="Удалить"/>

@@ -10,7 +10,7 @@ const equipmentMapState = (state, {match}) => {
   let fields = null;
 
   if (id && data.length > 0) {
-    fields = data.find(i => i.gid === parseInt(id))
+    fields = data.find(i => i.id === parseInt(id))
   }
   return {error, load, fields};
 };

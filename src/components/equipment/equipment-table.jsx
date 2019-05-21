@@ -14,17 +14,17 @@ export const ToolMenu = ({ rowData, remove }) => {
         icon='edit'
         text="Изменить"
         tagName={Link}
-        to={`/equipment/update/${rowData.gid}`} />
+        to={`/equipment/update/${rowData.id}`} />
       <MenuItem
         icon='map-marker'
         text="На карте"
         tagName={Link}
-        to={`/equipment/map/${rowData.gid}`} />
+        to={`/equipment/map/${rowData.id}`} />
       <MenuItem
         icon='trash'
         intent={Intent.DANGER}
         text="Удалить"
-        onClick={() => remove(rowData.gid)} />
+        onClick={() => remove(rowData.id)} />
     </Menu>
   )
 }
@@ -74,7 +74,7 @@ const EquipmentTable = ({data, remove}) => {
           width={.13 * width}
           dataKey="name"
           cellRenderer={({rowData}) => (
-            <Link to={`/equipment/details/${rowData.gid}`}>
+            <Link to={`/equipment/details/${rowData.id}`}>
               {rowData.name}
             </Link>
           )}/>
