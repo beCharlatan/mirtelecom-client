@@ -12,7 +12,7 @@ const initialState = {
     load: false,
     error: null
   },
-  auth: localStorage && JSON.parse(localStorage['auth']),
+  auth: true,
   notification: null,
   equipment: {
     data: [],

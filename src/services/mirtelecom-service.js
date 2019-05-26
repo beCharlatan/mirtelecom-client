@@ -1,10 +1,10 @@
 export default class MirtelecomService {
 
   // dev
-  //_apiBase = 'http://localhost/api'
-  //_authBase = 'http://localhost/auth'
-  _apiBase = 'http://192.168.1.18/api'
-  _authBase = 'http://192.168.1.18/auth'
+  _apiBase = 'http://localhost/api'
+  _authBase = 'http://localhost/auth'
+  // _apiBase = 'http://192.168.1.18/api'
+  // _authBase = 'http://192.168.1.18/auth'
   // prod
   //_apiBase = 'http://172.16.13.250:8081/api'
   //_authBase = 'http://172.16.13.250:8081/auth'
