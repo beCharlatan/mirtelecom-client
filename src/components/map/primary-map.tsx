@@ -86,12 +86,13 @@ class PrimaryMap extends React.Component<IPrimaryMapProps> {
                     <MarkerClusterGroup>
                         {
                             markers && markers.map((i, idx): React.ReactNode => {
-                                return <Marker key={idx}
-                                               icon={i.properties.status === 'MTK' || i.properties.status === 'МТК' ? IconEquipMtk : i.properties.status === 'EK' || i.properties.status === 'ЭК' ? IconEquipEk : IconEquipDef}
-                                               position={i.geometry.coordinates.reverse()}>
-                                    <Popup><EquipmentPopup item={i}/></Popup>
-                                    <Tooltip>{i.properties.name}</Tooltip>
-                                </Marker>
+                                if (i.geometry)
+                                    return <Marker key={idx}
+                                                   icon={i.properties.status === 'MTK' || i.properties.status === 'МТК' ? IconEquipMtk : i.properties.status === 'EK' || i.properties.status === 'ЭК' ? IconEquipEk : IconEquipDef}
+                                                   position={i.geometry.coordinates.reverse()}>
+                                        <Popup><EquipmentPopup item={i}/></Popup>
+                                        <Tooltip>{i.properties.name}</Tooltip>
+                                    </Marker>
                             })
                         }
                     </MarkerClusterGroup>

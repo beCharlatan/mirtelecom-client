@@ -10,6 +10,7 @@ import PrimaryMap from '../map/primary-map'
 import EquipmentTable from '../equipment/equipment-table'
 import EquipmentList from '../equipment/equipment-list'
 import EquipRtable from '../equipment/equip-rtable'
+import EquipmentTableOptionsForm from '../forms/equipment-table-form'
 
 const LinkButtons = <ButtonGroup>
   <LinkButton
@@ -34,6 +35,7 @@ const EquipmentPage = ({match}) => {
       center={<FilterItems/>}
       right={LinkButtons}
     />
+    <EquipmentTableOptionsForm />
     {
       match.params.display === 'table' &&
       <EquipmentData

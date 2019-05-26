@@ -57,3 +57,39 @@
 .table-grid, .table-header {
   outline: none;
 }
+
+.rtable {
+  background-color: $grey-light-1;
+
+  &__td {
+    padding: 1.5rem !important;
+    white-space: normal !important;
+
+    &--red {
+      background-color: rgba(orangered, .3);
+    }
+
+    &--blue {
+      background-color: rgba($primary-light, .4);
+    }
+  }
+
+  &__th {
+    padding: 1.5rem !important;
+    text-transform: uppercase;
+    transition: all .2s;
+
+    &:hover, &:focus {
+      background-color: $grey-light-4;
+    }
+  }
+}
+
+.td-title {
+  display: flex;
+  justify-content: space-between;
+}
+
+.td-delete {
+  height: 100%;
+}

@@ -6,7 +6,6 @@ import {Motion, spring} from "react-motion"
 import SimpleMap from '../map/simple-map'
 
 const EquipmentCard = ({data, remove, history}) => {
-  console.log(data)
     const {equipment, address, status, note, name, sn, ip, id, geom} = data
     const coords = geom && JSON.parse(geom).coordinates.reverse()
     return <div className="card">

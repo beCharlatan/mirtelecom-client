@@ -1,0 +1,18 @@
+.options {
+  &__btn, &__card {
+    margin-bottom: 1rem;
+  }
+}
+
+.opt-card {
+  background-color: $grey-light-1;
+  border: .5px solid $grey-light-3;
+
+  &__save {
+    margin: 0;
+  }
+
+  &__divider {
+    margin-bottom: 2rem;
+  }
+}

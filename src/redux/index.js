@@ -12,7 +12,8 @@ const initialState = {
     load: false,
     error: null
   },
-  auth: localStorage && JSON.parse(localStorage['auth']),
+  auth: localStorage.auth &&
+    JSON.parse(localStorage['auth']),
   notification: null,
   equipment: {
     data: [],
@@ -22,23 +23,22 @@ const initialState = {
     filter: []
   },
   options: {
-    equipmentTable: {
-      defaultPageSize: 25,
-      pageSizeOptions: [10, 20, 25, 50],
-      showPaginationTop: false,
-      resizable: true,
-      shownFields: [
-        'name',
-        'address',
-        'equipment',
-        'status',
-        'ip',
-        'sn',
-        'note'
-      ]
-    }
+    equipmentTable: localStorage.equipmentTableOptions &&
+      JSON.parse(localStorage['equipmentTableOptions'])
   }
 }
+
+export const {
+  changeOptions,
+} = createActions({
+  CHANGE_OPTIONS: ({options, optionsType}) => {
+    return {
+      options: options,
+      optionsType: optionsType
+    }
+  }
+})
+
 
 export const {
   mapRequest,
@@ -214,7 +214,7 @@ export const fetchSignIn = (mirtelecomService) => (obj) => (dispatch) => {
   mirtelecomService.getSignIn(obj)
     .then(data => {
       dispatch(signIn(data))
-      localStorage['auth'] = data
+      localStorage['auth'] = JSON.stringify(data)
     })
     .catch(error => console.log(error, 'err'))
 }
@@ -337,7 +337,14 @@ const notificationReducer = handleActions({
   [clearNotification]: () => (null)
 }, initialState.notification)
 
-const optionsReducer = handleActions({}, initialState.options)
+const optionsReducer = handleActions({
+  [changeOptions]: (state, {payload}) => {
+    return {
+      ...state,
+      [payload.optionsType]: Object.assign({}, payload.options)
+    }
+  }
+}, initialState.options)
 
 export default combineReducers({
   map: mapReducer,

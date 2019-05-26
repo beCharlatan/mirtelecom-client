@@ -29,7 +29,7 @@ const Filter = ({filter, load, error, filterEquipment}) => {
         title="Добавить элемент"
         to="/equipment/create"
         disabled={load || error}
-        className="btn btn--green filter-control__btn" 
+        className="btn btn--green filter-control__btn"
         intent={Intent.SUCCESS}
         icon="plus"
         large />

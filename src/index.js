@@ -16,7 +16,25 @@ import './scss/index.scss'
 const mirtelecomService = new MirtelecomService()
 
 if (!('auth' in localStorage)) {
-  localStorage['auth'] = false
+  localStorage['auth'] = JSON.stringify(false)
+}
+
+if (!('equipmentTableOptions' in localStorage)) {
+  localStorage['equipmentTableOptions'] = JSON.stringify({
+    pageSize: 21,
+    showPaginationTop: false,
+    resizable: true,
+    shownFields: [
+      'name',
+      'address',
+      'equipment',
+      'status',
+      'ip',
+      'sn',
+      'note'
+    ]
+  })
+  console.log(localStorage)
 }
 
 ReactDOM.render(

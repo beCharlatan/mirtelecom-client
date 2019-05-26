@@ -1,4 +1,4 @@
-import {required, isGreaterThan} from './validate'
+import {required, isGreaterThan, ipRegEx} from './validate'
 import {composeValidators} from "./index"
 import TextInput from '../components/common/text-input'
 import TextAreaInput from '../components/common/text-area'
@@ -40,7 +40,7 @@ export const equipmentFormMask = [
     type: 'text',
     name: 'ip',
     component: TextInput,
-    validate: isGreaterThan(30),
+    validate: composeValidators(isGreaterThan(30), ipRegEx),
     label: 'IP адрес',
     placeholder: '127.0.0.1'
   },
@@ -48,7 +48,7 @@ export const equipmentFormMask = [
     type: 'text',
     name: 'sn',
     component: TextInput,
-    validate: composeValidators(required, isGreaterThan(30)),
+    validate: isGreaterThan(30),
     label: '№ серии',
     placeholder: '000000000'
   },
