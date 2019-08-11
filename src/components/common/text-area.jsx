@@ -1,7 +1,7 @@
-import React from 'react';
-import {FormGroup, TextArea} from '@blueprintjs/core';
+import React from 'react'
+import {FormGroup, TextArea} from '@blueprintjs/core'
 
-const TextAreaInput = ({input, placeholder, rows, label, meta: {touched, error}}) => {
+const TextAreaInput = ({input, placeholder, rows, label}) => {
   return (
     <FormGroup
       label={label}
@@ -38,4 +38,4 @@ const TextAreaInput = ({input, placeholder, rows, label, meta: {touched, error}}
 //   inputClass: PropTypes.string,
 // };
 
-export default TextAreaInput;
+export default TextAreaInput

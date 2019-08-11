@@ -1,0 +1,68 @@
+// FORM PAGE DOCUMENT
+.form-page {
+  padding: 2rem 0;
+
+  @include respond(tab-port) {
+    padding: 1rem;
+  }
+
+  @include respond(phone) {
+    padding: 0;
+  }
+}
+
+//////////////////////////////////////////////////
+
+.buttons {
+
+  @include respond(phone) {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__item {
+    margin: 2rem 0;
+
+    &:not(:last-child) {
+      margin-right: 1.5rem;
+
+      @include respond(phone) {
+        margin-right: 0;
+      }
+    }
+  }
+}
+
+.options {
+  &__btn, &__card {
+    margin-bottom: 1rem;
+  }
+}
+
+.opt-card {
+  background-color: $grey-light-1;
+  border: .5px solid $grey-light-3;
+
+  &__save {
+    margin: 0;
+  }
+
+  &__divider {
+    margin-bottom: 2rem;
+  }
+}
+
+.filter-control {
+  width: 100%;
+  display: flex;
+
+  &__input {
+    flex: 1;
+    align-self: center;
+  }
+
+  &__btn {
+    margin-left: 1rem;
+    border-radius: 50%;
+  }
+}

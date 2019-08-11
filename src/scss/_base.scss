@@ -51,3 +51,9 @@ h1, h2, h3, h4, h5, h6, p {
   border-radius: 4rem;
   background-color: $grey-dark-2;
 }
+
+.tag {
+  &--default {
+    margin-left: .5rem;
+  }
+}

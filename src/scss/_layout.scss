@@ -12,3 +12,24 @@
     max-width: 100%;
   }
 }
+
+.content {
+  padding: 50px 0 2rem 0;
+}
+
+.header {
+
+  &__links, &_divider, &__auth {
+    @include respond(tab-port) {
+      display: none;
+    }
+  }
+
+  &__burger {
+    display: none;
+
+    @include respond(tab-port) {
+      display: flex;
+    }
+  }
+}

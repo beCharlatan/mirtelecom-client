@@ -1,0 +1,59 @@
+.rtable {
+
+  &__td {
+    padding: 1.5rem !important;
+    white-space: normal !important;
+    word-wrap: break-word !important;
+
+    @include respond(tab-port) {
+      padding: 1rem !important;
+      font-size: 1.4rem;
+    }
+
+    @include respond(phone) {
+      padding: .5rem !important;
+      font-size: 1.2rem;
+    }
+
+    &--red {
+      color: orangered;
+    }
+
+    &--blue {
+      color: $primary;
+    }
+  }
+
+  &__th {
+    padding: 1.5rem !important;
+    text-transform: uppercase;
+    transition: all .2s;
+
+    @include respond(tab-port) {
+      padding: 1rem !important;
+      text-transform: capitalize;
+    }
+
+    @include respond(phone) {
+      padding: .5rem !important;
+      font-size: 1.4rem;
+    }
+
+    &:hover, &:focus {
+      background-color: $grey-light-3;
+    }
+  }
+}
+
+.td-title {
+  display: flex;
+  justify-content: space-between;
+}
+
+.link-to-marker {
+  cursor: help;
+}
+
+.td-delete {
+  height: 100%;
+}

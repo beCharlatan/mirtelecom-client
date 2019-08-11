@@ -21,25 +21,27 @@ const sort = ({sortBy, sortDirection}, list) => {
 };
 
 const getUnique = (arr, prop) => {
-  const result = R.uniq(R.pluck(prop, arr));
-  return result;
+  const result = R.uniq(R.pluck(prop, arr))
+    .filter(i => i.length > 0)
+    .sort()
+  return result
 };
 
 const _getStringOfValues = (obj) => {
-  let str = '';
-  for (let key in obj) {
-    if (!(key === 'id' || key === 'geom')) {
-      str += (obj[key].toLowerCase());
+  let str = ''
+  Object.values(obj).map(i => {
+    if (typeof i === 'string') {
+      str += i.toLowerCase()
     }
-  }
-  return str;
+  })
+  return str
 };
 
 const _checkFilterInputs = (str, filter) => {
   for (var i = filter.length - 1; i >= 0; i--) {
-    if (str.indexOf(filter[i].toLowerCase()) === -1) return false; 
+    if (str.indexOf(filter[i].toLowerCase()) === -1) return false
   }
-  return true;
+  return true
 };
 
 const lazyFilter = (data, filter) => {

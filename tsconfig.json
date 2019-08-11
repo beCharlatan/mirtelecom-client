@@ -1,18 +1,22 @@
 {
   "extends": ["tslint:recommended", "tslint-react", "tslint-config-prettier"],
+  "compileOnSave": true,
   "linterOptions": {
     "exclude": [
       "node_modules/**/*.ts",
-      "src/serviceWorker.js"
+      "src/serviceWorker.js",
+      "config/**/*"
     ],
     "include": [
-      "./src/components/map/**/*"
+      "./src/components/**/*"
     ]
   },
   "rules": {
-    "object-literal-sort-keys": false // правило сортировки свойств объекта по алфавиту отключено
+    "object-literal-sort-keys": false, // правило сортировки свойств объекта по алфавиту отключено
+    "strictNullChecks": false 
   },
   "compilerOptions": {
+    "removeComments": true,
     "jsx": "react"
   }
 }

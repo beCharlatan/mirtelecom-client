@@ -1,64 +1,83 @@
-import React from 'react'
-import {EquipmentSwitcher} from '../switcher-data-display/switcher-data-display'
+import React, {useRef, useState} from 'react'
+import SwitcherDataDisplay from '../switcher-data-display/switcher-data-display'
+import * as SmoothScroll from 'smooth-scroll'
+import FeaturesContainer from '../../containers/features-container'
 import AppToolbar from '../toolbar/app-toolbar'
 import FilterItems from '../forms/filter-items'
-import LinkButton from '../common/link-button'
-import {ButtonGroup} from '@blueprintjs/core'
-import EquipmentData from '../equipment/equipment-data'
-import FeaturesData from '../map/features-data'
-import PrimaryMap from '../map/primary-map'
-import EquipmentTable from '../equipment/equipment-table'
-import EquipmentList from '../equipment/equipment-list'
-import EquipRtable from '../equipment/equip-rtable'
+import {ButtonGroup, Button, Intent} from '@blueprintjs/core'
+import EquipmentsContainer from '../../containers/equipments-container'
+import PrimaryMap from '../../features/map/primary-map'
+import EquipmentList from '../../features/equipment/equipment-list'
+import EquipRtable from '../../features/equipment/equip-rtable'
+import EquipmentTableOptionsForm from '../forms/equipment-table-form'
+import ErrorBoundry from "../error/error-boundry"
+
+const goToZabbix = () => () => window.open("http://172.16.13.251/zabbix/maps.php", '_blank');
+
+const equipmentOptions = [
+  {
+    value: 'table',
+    icon: 'th',
+    title: 'Отобразить таблицей'
+  },
+  {
+    value: 'list',
+    icon: 'list',
+    title: 'Отобразить списком'
+  }
+];
 
 const LinkButtons = <ButtonGroup>
-  <LinkButton
-    title="Перейти в систему мониторинга ВОК"
-    to='/kek'
-    text='OSPInsightFTI'
-    className="btn btn--blue"/>
-  <LinkButton
+  <Button
+    onClick={goToZabbix()}
     title="Перейти на Zabbix"
-    to='/kek'
     text='Zabbix'
-    className="btn btn--blue"/>
-</ButtonGroup>
+    intent={Intent.PRIMARY} />
+</ButtonGroup>;
 
-const EquipmentPage = ({match}) => {
-  return <section className="container">
-    <div className="card__header">
-      <h1 className="card__title">Оборудование АО МирТелеКом</h1>
-    </div>
+const EquipmentPage = () => {
+
+  let [dataDisplay, setDataDisplay] = useState('table');
+  const onSetDataDisplay = (prop) => setDataDisplay(prop);
+
+  const mapRef = useRef();
+
+  const scrollTo = (target, options) => {
+    const scroll = new SmoothScroll();
+    const anchor = document.querySelector(target);
+    scroll.animateScroll(anchor, null, options)
+  }
+
+  return <main>
     <AppToolbar
-      left={<EquipmentSwitcher/>}
+      left={<SwitcherDataDisplay options={equipmentOptions} action={onSetDataDisplay} current={dataDisplay} />}
       center={<FilterItems/>}
       right={LinkButtons}
     />
-    {
-      match.params.display === 'table' &&
-      <EquipmentData
-        render={({data, remove}) => <EquipRtable data={data} remove={remove} />}
-      />
-    }
-    {/*{*/}
-    {/*  match.params.display === 'table' &&*/}
-    {/*  <EquipmentData*/}
-    {/*    render={({data, remove}) => <EquipmentTable data={data} remove={remove} />}*/}
-    {/*  />*/}
-    {/*}*/}
-    {
-      match.params.display === 'list' &&
-      <EquipmentData
-        render={({data}) => <EquipmentList data={data} />}
-      />
-    }
-    <div className="card__header">
-      <h1 className="card__title">Карта</h1>
-    </div>
-    <FeaturesData
-      render={({features}) => <PrimaryMap features={features}/>}
-    />
-  </section>
-}
+    <section className="container">
+      {dataDisplay === 'table' && <EquipmentTableOptionsForm />}
+      {dataDisplay === 'table' && <EquipmentsContainer
+        render={({data, remove}) => <EquipRtable
+          data={data}
+          remove={remove}
+          scrollTo={scrollTo}
+        />}
+      />}
+      {dataDisplay === 'list' && <EquipmentsContainer
+        render={({data, remove, history}) => <EquipmentList
+          data={data}
+          remove={remove}
+          history={history}
+          scrollTo={scrollTo}
+        />}
+      />}
+      <ErrorBoundry>
+        <FeaturesContainer
+          render={({features}) => <PrimaryMap ref={mapRef} features={features} />}
+        />
+      </ErrorBoundry>
+    </section>
+  </main>
+};
 
 export default EquipmentPage

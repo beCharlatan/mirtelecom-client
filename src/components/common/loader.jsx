@@ -1,12 +1,8 @@
-import React from 'react'
+import * as React from 'react'
 import {Spinner, Intent} from '@blueprintjs/core'
 
-const Loader = () => {
-  return (
-    <div style={{margin: '10rem'}}>
-      <Spinner intent={Intent.PRIMARY} size={100} />
-    </div>
-  );
-}
+const Loader = () => <div style={{margin: '10rem'}}>
+  <Spinner intent={Intent.PRIMARY} size={100} />
+</div>
 
-export default Loader;
+export default Loader

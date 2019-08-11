@@ -1,13 +1,16 @@
 import React from 'react'
-import EquipmentData from '../equipment/equipment-data'
-import EquipmentCard from "../equipment/equipment-card"
+import EquipmentContainer from '../../containers/equipment-container'
+import EquipmentCard from '../../features/equipment/equipment-card'
+import ErrorBoundry from '../error/error-boundry'
 
-const EquipmentDetailedPage = () => {
+const EquipmentDetailedPage = ({history}) => {
   return <section className="container">
-    <EquipmentData
-      render={({data, remove}) => <EquipmentCard data={data} remove={remove} />}
-    />
-  </section>;
-};
+    <ErrorBoundry>
+      <EquipmentContainer
+        render={({data, remove, geocode}) => <EquipmentCard history={history} data={data} remove={remove} geocode={geocode} />}
+      />
+    </ErrorBoundry>
+  </section>
+}
 
-export default EquipmentDetailedPage;
+export default EquipmentDetailedPage

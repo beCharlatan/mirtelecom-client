@@ -1,13 +1,10 @@
 import React from 'react'
-import {EquipmentForm} from '../mtk-components/mtk-forms'
+import {EquipmentForm} from '../../containers/data-form-container'
 
-const EquipmentFormPage = ({match}) => {
+const EquipmentFormPage = () => {
   return <div className="container form-page">
-    <div className="card__header">
-      <h1 className="card__title">{match.params.id ? 'Обновить оборудование' : 'Добавить новое оборудование'}</h1>
-    </div>
     <EquipmentForm />
   </div>
-};
+}
 
-export default EquipmentFormPage;
+export default EquipmentFormPage

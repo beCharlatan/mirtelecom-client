@@ -1,17 +1,22 @@
-import React from 'react';
-import {connect} from 'react-redux';
+import React from 'react'
+import {connect} from 'react-redux'
 import LinkButton from '../common/link-button'
-import {filterEquipment} from '../../redux';
-import {TagInput, Button, Intent} from '@blueprintjs/core';
+import {filterEquipment} from '../../store/equipment'
+import {TagInput, Button, Intent} from '@blueprintjs/core'
 
 const Filter = ({filter, load, error, filterEquipment}) => {
+
+  const _filter = (arr) => () => {
+    if (arr.join('') !== filter.join('')) return filterEquipment(arr)
+    return false
+  }
   
   const clearButton = (
     <Button
       title="Очистить фильтр"
       icon='cross'
       minimal={true}
-      onClick={() => filterEquipment([])}
+      onClick={_filter([])}
     />
   );
 
@@ -20,29 +25,26 @@ const Filter = ({filter, load, error, filterEquipment}) => {
       <TagInput
         className='filter-control__input'
         leftIcon='search'
-        placeholder='Вы что-то искали?..'
+        placeholder='Вы что-то ищите?..'
         values={filter}
         rightElement={clearButton}
-        onChange={(values) => filterEquipment(values)}    
+        onChange={(values) => {
+          filterEquipment(values)
+        }}    
       />
       <LinkButton
+        className="ml1"
         title="Добавить элемент"
         to="/equipment/create"
         disabled={load || error}
-        className="btn btn--green filter-control__btn" 
         intent={Intent.SUCCESS}
-        icon="plus"
-        large />
+        icon="plus" />
     </div>
   )
 };
 
-const mapStateToProps = ({equipment: {filter, load, error}}) => {
-  return {filter, load};
+const mapStateToProps = ({equipment: {filter, load}}) => {
+  return {filter, load}
 }
 
-const mapDispatchToProps = {
-  filterEquipment: filterEquipment
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Filter);
+export default connect(mapStateToProps, {filterEquipment})(Filter);

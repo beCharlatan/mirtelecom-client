@@ -1,6 +1,27 @@
 .text-initial {
   font-size: 4rem;
   color: darkblue;
+
+  @include respond(tab-port) {
+    font-size: 3.5rem;
+  }
+
+  @include respond(phone) {
+    font-size: 3rem;
+  }
+}
+
+.table-title {
+  font-size: 1.6rem;
+  font-weight: 500;
+
+  @include respond(tab-port) {
+    font-size: 1.5rem;
+  }
+
+  @include respond(phone) {
+    font-size: 1.4rem;
+  }
 }
 
 .input-label {
@@ -24,6 +45,10 @@
   justify-content: flex-end;
 }
 
+.mt-2 {
+  margin-top: 2rem;
+}
+
 .mb-1 {
   margin-bottom: 1rem;
 }
@@ -38,4 +63,21 @@
 
 .mb-4 {
   margin-bottom: 4rem;
+}
+
+.opacity60 {
+  opacity: .6
+}
+
+.ml1 {
+  margin-left: 1rem;
+}
+
+.no-flex {
+  display: block !important;
+}
+
+.disable-link {
+  text-decoration: none !important;
+  color: inherit !important;
 }

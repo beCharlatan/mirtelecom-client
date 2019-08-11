@@ -18,19 +18,12 @@
 // layout
 @import "./layout";
 
-// components
-@import "./components/button";
-@import "./components/type";
-
 // import custom scss files
-@import "../components/pages/home-page";
-@import "../components/forms/filter-items";
-@import "../components/pages/form-page";
-@import "../components/header/app-header";
-@import "../components/toolbar/app-toolbar";
-@import "../components/equipment/table";
-@import "../components/forms/data-form";
-@import "../components/equipment/list";
-@import "../components/equipment/card";
-@import "../components/statistics-bar/statistics-bar";
-@import "../components/map/map";
+@import "./pages/links-page";
+@import "./components/app-toolbar";
+@import "./components/table";
+@import "./components/form";
+@import "./components/list";
+@import "./components/card";
+@import "./components/statistics-bar";
+@import "./components/map";

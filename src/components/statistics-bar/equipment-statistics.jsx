@@ -1,12 +1,8 @@
-import React, {memo} from 'react'
+import React from 'react'
 
 const EquipmentStatistics = ({data}) => {
-
-  const mtkItems = data.filter(i =>
-    i.status.toUpperCase() === "MTK" || i.status.toUpperCase() === "МТК")
-
-  const ekItems = data.filter(i =>
-    i.status.toUpperCase() === "EK" || i.status.toUpperCase() === "ЭК")
+  const mtkItems = data.filter(i => i.status.match(/mtk|MTK|мтк|МТК/))
+  const ekItems = data.filter(i => i.status.match(/ek|Ek|EK|ЭК|эк|Эк/))
 
   return <article className="stats-bar">
     <span className="stats-bar__item">
@@ -21,4 +17,4 @@ const EquipmentStatistics = ({data}) => {
   </article>
 }
 
-export default memo(EquipmentStatistics)
+export default React.memo(EquipmentStatistics)

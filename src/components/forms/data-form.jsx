@@ -1,7 +1,6 @@
 import React from 'react'
-import cl from 'classnames'
 import {Form, Field} from 'react-final-form'
-import {Button, Card} from '@blueprintjs/core'
+import {Button, Card, Intent} from '@blueprintjs/core'
 
 const DataForm = ({mask, handleSubmit, ...props}) => {
 
@@ -32,22 +31,19 @@ const DataForm = ({mask, handleSubmit, ...props}) => {
               type='submit'
               disabled={submitting || pristine || invalid}
               loading={load}
-              large
               icon="error"
-              className='buttons__item btn btn--blue-alt'
+              intent={Intent.WARNING}
               text="Ошибка. Отправить заново" />}
             {!error && <Button
               type='submit'
               disabled={submitting || pristine || invalid}
               loading={load}
-              large
+              intent={Intent.SUCCESS}
               icon={fields ? 'automatic-updates' : 'plus'}
-              className={['buttons__item btn', cl('btn--green', fields &&  'btn--blue')]}
               text={fields ? 'Обновить' : 'Создать'} />}
             {!fields && !load &&
               <Button
-                className='buttons__item btn btn--default'
-                large
+                minimal
                 onClick={reset}
                 text='Сбросить' />
             }

@@ -3,7 +3,7 @@ import {Navbar} from '@blueprintjs/core'
 
 const AppToolbar = ({left, center, right}) => {
   return (
-    <Navbar className="container container--dark app-toolbar">
+    <Navbar className="app-toolbar">
       <Navbar.Group className="app-toolbar__group">
         {left}
       </Navbar.Group>
@@ -16,7 +16,7 @@ const AppToolbar = ({left, center, right}) => {
         {right}
       </Navbar.Group>
     </Navbar>
-  );
-};
+  )
+}
 
-export default AppToolbar;
+export default AppToolbar

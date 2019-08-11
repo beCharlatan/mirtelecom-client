@@ -2,14 +2,13 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router'
 import {compose} from '../utils'
-import withMirtelecomService from './with-mirtelecom-service'
 
 const withDataForm = (mapState, actions, mask) => (Wrapped) => {
 
   class Wrapper extends React.Component {
 
     handleSubmit = values => {
-      const redirect = () => this.props.history.push('/equipments/dashboard/table');
+      const redirect = () => this.props.history.push('/')
       if (!values.id) {
         this.props.create(values, redirect)
       } else {
@@ -21,15 +20,14 @@ const withDataForm = (mapState, actions, mask) => (Wrapped) => {
       return <Wrapped
         mask={mask}
         handleSubmit={this.handleSubmit}
-        {...this.props} />;
+        {...this.props} />
     }
   }
   
   return compose(
     withRouter,
-    withMirtelecomService(),
     connect(mapState, actions)
-  )(Wrapper);
+  )(Wrapper)
 }
 
-export default withDataForm;
+export default withDataForm

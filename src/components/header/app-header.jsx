@@ -1,55 +1,66 @@
-import React from 'react'
+import * as React from 'react'
 import {NavLink} from 'react-router-dom'
-import NavLinkButton from '../common/nav-link-button'
-import {Navbar, Alignment, Popover, Button, Menu, MenuItem} from '@blueprintjs/core'
-
-const popupMenu = (
-  <Menu>
-    <MenuItem
-      text="Оборудование"
-      tagName={NavLink}
-      to="/equipments/dashboard/table" />
-    <MenuItem
-      text="Клиенты"
-      tagName={NavLink} 
-      to="/clients" />
-    <MenuItem  
-      text="Линки"
-      tagName={NavLink}
-      to="/links" />
-  </Menu>
-)
+import {Navbar, Alignment, Popover, Button, Position, PopoverInteractionKind, MenuItem, Menu} from '@blueprintjs/core'
+import AuthForm from '../forms/auth-form'  
 
 const AppHeader = () => {
-  return <Navbar className="bp3-dark app-header">
-    <Navbar.Group>
-      <img src="../../assets/miniLogo.svg" alt="логотип программы" className="app-header__logo"/>
-      <Navbar.Heading className="head-2">МТКмененджер</Navbar.Heading>
+  return <Navbar fixedToTop className="bp3-dark header">
+    <Navbar.Group align={Alignment.LEFT}>
+      <Navbar.Heading>МирТелеКом</Navbar.Heading>
     </Navbar.Group>
-    <Navbar.Group align={Alignment.RIGHT} className="app-header__nav">
-      <NavLinkButton minimal
-                     title="Таблица оборудования"
-                     className="app-header__link"
-                     text="Оборудование"
-                     to="/equipments/dashboard/table"
-                     isActive={(_, {pathname}) => pathname.match(/\/equipments\/dashboard\/(table|list)/)}
-                     active="link--active"/>
-      <NavLinkButton minimal
-                     title="Таблица клиентов"
-                     className="app-header__link"
-                     text="Клиенты"
-                     to="/clients"
-                     active="link--active"/>
-      <NavLinkButton minimal
-                     title="Полезные источники"
-                     className="app-header__link"
-                     text="Линки"
-                     to="/links"
-                     active="link--active"/>
+    <Navbar.Group align={Alignment.LEFT} className="header__links">
+      <Navbar.Divider className="header__divider" />
+      <NavLink 
+        to="/" 
+        className="disable-link">
+        <Button minimal text="Оборудование" />
+      </NavLink>
+      <NavLink 
+        to="/clients"
+        className="disable-link">
+        <Button minimal text="Клиенты" />
+      </NavLink>
+      <NavLink 
+        to="/links"
+        className="disable-link">
+        <Button minimal text="Линки" />
+      </NavLink>
     </Navbar.Group>
-    <Navbar.Group align={Alignment.RIGHT}>
-      <Popover content={popupMenu} minimal>
-        <Button icon="menu" className="app-header__burger btn btn--blue"/>
+    <Navbar.Group align={Alignment.RIGHT} className="header__auth">
+      <Popover
+        minimal
+        interactionKind={PopoverInteractionKind.CLICK}
+        popoverClassName="bp3-popover-content-sizing"
+        position={Position.BOTTOM_RIGHT}>
+        <Button minimal icon="person" />
+        <AuthForm />
+      </Popover>
+    </Navbar.Group>
+    <Navbar.Group align={Alignment.RIGHT} className="header__burger">
+      <Popover 
+        minimal 
+        interactionKind={PopoverInteractionKind.CLICK}
+        position={Position.BOTTOM_RIGHT}
+        autoFocus={false}>
+        <Button icon="menu" className="burger-menu"/>
+        <Menu>
+          <MenuItem
+            text="Оборудование"
+            tagName={NavLink}
+            to="/" />
+          <MenuItem
+            text="Клиенты"
+            tagName={NavLink}
+            to="/clients" />
+          <MenuItem  
+            text="Линки"
+            tagName={NavLink}
+            to="/links" />
+          <Menu.Divider />
+          <MenuItem text="Авторизация">
+            <AuthForm />
+          </MenuItem>
+        </Menu>
       </Popover>
     </Navbar.Group>
   </Navbar>

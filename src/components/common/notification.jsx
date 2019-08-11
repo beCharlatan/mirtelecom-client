@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {clearNotification} from '../../redux'
+import {clearNotification} from '../../store/notification'
 import {Toaster, Position, Intent} from '@blueprintjs/core'
 
 export const AppToaster = Toaster.create({
@@ -26,13 +26,13 @@ class Notification extends React.Component {
       message: this.props.notification.message,
       intent: Intent[this.props.notification.intent],
       timeout: 3000
-    });
+    })
   }
 
   closeToast = () => AppToaster.clear()
 
   render() {
-    return false;
+    return false
   }
 }
 
@@ -41,8 +41,4 @@ const mapState = state => {
   return {notification}
 }
 
-const actions = ({
-  clearNotification
-})
-
-export default connect(mapState, actions)(Notification)
+export default connect(mapState, {clearNotification})(Notification)

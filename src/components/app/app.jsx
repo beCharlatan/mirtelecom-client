@@ -1,10 +1,10 @@
 import React from 'react'
 import {Switch, Route} from 'react-router-dom'
 import ProtectedRoute from '../common/protected-route'
-import HomePage from '../pages/home-page'
 import EquipmentPage from '../pages/equipment-page'
 import EquipmentDetailedPage from '../pages/equipment-detailed-page'
 import ClientsPage from '../pages/clients-page'
+import LinksPage from '../pages/links-page'
 import EquipmentFormPage from '../pages/equipment-form-page'
 import Page404 from '../error/404'
 import AppHeader from '../header/app-header'
@@ -12,20 +12,18 @@ import Notification from '../common/notification'
 
 const App = () => {
   return (
-    <div>
-      <Switch>
-        <Route exact path='/' component={HomePage} />
-      </Switch>
-      <Route path='/(.+)' render={() => <div>
-        <AppHeader/>
-        <Notification/>
+    <React.Fragment>
+      <AppHeader/>
+      <Notification/>
+      <main className="content">
         <Switch>
           <Route
             exact
-            path="/equipments/dashboard/:display"
+            path="/"
             component={EquipmentPage}/>
           <ProtectedRoute
-            path="/equipment/details/:id"
+            exact
+            path="/equipments/:id"
             component={EquipmentDetailedPage}/>
           <ProtectedRoute
             exact
@@ -38,11 +36,14 @@ const App = () => {
             path="/clients"
             component={ClientsPage}/>
           <Route
+            path="/links"
+            component={LinksPage}/>
+          <Route
             component={Page404}/>
         </Switch>
-      </div>} />
-    </div>
-  );
+      </main>
+    </React.Fragment>
+  )
 }
 
-export default App;
+export default App

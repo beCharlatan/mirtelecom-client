@@ -1,14 +1,14 @@
-import React from 'react';
-import {NonIdealState} from '@blueprintjs/core';
+import * as React from 'react'
+import {NonIdealState} from '@blueprintjs/core'
 
-const ErrorMessage = () => {
-  return (
-    <NonIdealState
-      icon='error'
-      title="Ошибка"
-      description='Что-то пошло не так, попробуйте повторить операцию позже.'
-    />
-  );
-}
+const ErrorMessage = ({
+  icon,
+  title,
+  desc = null
+}) => <NonIdealState
+  icon={icon}
+  title={title}
+  desc={desc}
+/>
 
-export default ErrorMessage;
+export default ErrorMessage

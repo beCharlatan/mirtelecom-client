@@ -2,7 +2,7 @@ import React from 'react'
 import cl from 'classnames'
 import {FormGroup, InputGroup, Intent} from '@blueprintjs/core'
 
-const TextInput = ({input, type, placeholder, label, meta: {touched, error}}) => {
+const TextInput = ({input, type, placeholder, label, min, max, meta: {touched, error}}) => {
   return (
     <FormGroup
       className={cl('input-label', touched && error && 'error-text')}
@@ -13,10 +13,12 @@ const TextInput = ({input, type, placeholder, label, meta: {touched, error}}) =>
       >
       <InputGroup
         {...input}
+        type={type}
+        min={min}
+        max={max}
         id={`id-${input.name}`}
         intent={touched && error ? Intent.DANGER : null}
         placeholder={placeholder}
-        type={type}
       />
     </FormGroup>
   )

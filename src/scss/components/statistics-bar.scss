@@ -1,0 +1,29 @@
+.stats-bar {
+  margin-bottom: 1rem;
+
+  @include respond(tab-port) {
+    margin-bottom: .5rem;
+    padding: 0 1.5rem;
+  }
+
+  &__item {
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: $grey-dark-3;
+  }
+
+  &__count {
+    font-size: 2rem;
+    margin-right: .5rem;
+    font-weight: 300;
+
+    &--blue {color: $primary}
+    &--red {color: orangered}
+    &--default {color: $grey-dark-1}
+
+  }
+
+  &__item:not(:last-child) {
+    margin-right: 2.5rem;
+  }
+}
