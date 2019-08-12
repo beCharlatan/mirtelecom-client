@@ -13,7 +13,7 @@ import './scss/index.scss'
 ReactDOM.render(
   <Provider store={store}>
     <ErrorBoundry>
-      <Router basename="/mirtelecom2">
+      <Router basename="/">
         <App />
       </Router>
     </ErrorBoundry>

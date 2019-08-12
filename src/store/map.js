@@ -1,5 +1,6 @@
 import {handleActions, createActions} from 'redux-actions'
-import {mirtelecomService} from '../services/mirtelecom-service'
+//import {mirtelecomService} from '../services/mirtelecom-service'
+import {dummyService as mirtelecomService} from '../services/dummy-service'
 import {showNotification} from './notification'
 
 const initialState = {

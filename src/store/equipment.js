@@ -1,7 +1,8 @@
 import { handleActions, createActions } from 'redux-actions'
 import { createSelector } from 'reselect'
 import { lazyFilter } from '../utils'
-import { mirtelecomService } from '../services/mirtelecom-service'
+//import { mirtelecomService } from '../services/mirtelecom-service'
+import {dummyService as mirtelecomService} from '../services/dummy-service'
 import { mapRequest, mapFailure } from './map'
 import { showNotification } from './notification'
 

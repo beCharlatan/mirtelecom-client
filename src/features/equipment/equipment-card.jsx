@@ -80,12 +80,13 @@ const EquipmentCard = ({data, remove, history, geocode}) => {
               <Card elevation={2} className="card__cfg" style={{opacity: style.opacity, transform: `translateX(${style.x}px)`}}>
                   <h3 className="card__tag">Файл конфигурации</h3>
                   {name && <Callout>
-                    <iframe
+                    {/* <iframe
                       className="card__cfg-text"
                       title={`Файл конфигурации ${name}`}
-                      src={`http://172.16.13.250/cisconfig/${name}.txt`} 
+                      src={`localhost/cisconfig/${name}.txt`} 
                       frameBorder="0"
-                    />
+                    /> */}
+                    <p className="card__cfg-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nesciunt voluptas earum non quia ea ratione iure quo eligendi mollitia quasi accusamus, fuga, veniam saepe, ipsum illum consequuntur. Debitis, sunt nemo!</p>
                   </Callout>}
               </Card>
           )}</Motion>
